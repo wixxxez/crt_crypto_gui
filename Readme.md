@@ -16,15 +16,15 @@ Error Handling: The program will include error handling mechanisms to handle inv
 ### Timeline and Milestones:
 To ensure a smooth development process, we have established the following timeline and milestones:
 
-Requirements Gathering: Complete by [15.06.2023]
+#### Requirements Gathering: Complete by [15.06.2023]
 Identify and finalize the desired features and functionality of the program.
-GUI Design and Prototyping: Complete by [25.06.2023]
+#### GUI Design and Prototyping: Complete by [25.06.2023]
 Create a visual representation of the GUI, including input fields, buttons, and result displays.
-Algorithm Implementation: Complete by [30.06.2023]
+#### Algorithm Implementation: Complete by [30.06.2023]
 Develop the multi-layer crypto algorithm based on CRT and integrate it into the program.
-Testing and Debugging: Complete by [10.07.2023]
+#### Testing and Debugging: Complete by [10.07.2023]
 Thoroughly test the program, identify and fix any bugs or issues.
-Documentation and User Guide: Complete by [15.07.2023]
+#### Documentation and User Guide: Complete by [15.07.2023]
 Prepare detailed documentation and a user guide to assist users in understanding and using the program effectively.
-Final Review and Deployment: Complete by [16.07.2023]
+#### Final Review and Deployment: Complete by [16.07.2023]
 Conduct a final review of the program, address any remaining concerns, and prepare for deployment.
