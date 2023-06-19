@@ -43,9 +43,9 @@ class NavigationBar(QHBoxLayout):
         config_button = NavBarButton("Config",self.open_config_dialog)
         self.config_button = config_button
         self.addWidget(self.config_button)
-        encypted_message_layout = NavBarView()
+        self.encypted_message_layout = NavBarView()
         self.addStretch(1)
-        self.addLayout(encypted_message_layout)
+        self.addLayout(self.encypted_message_layout)
         self.addStretch(1)
         close_button = NavBarButton("Close",main_layout.close)
     
@@ -53,5 +53,5 @@ class NavigationBar(QHBoxLayout):
         self.addWidget(self.close_button)
         
     def open_config_dialog(self):
-        dialog = ConfigDialog()
+        dialog = ConfigDialog(self.encypted_message_layout.update_label_bot_text)
         dialog.exec_()

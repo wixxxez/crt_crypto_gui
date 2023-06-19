@@ -61,9 +61,7 @@ if __name__ == "__main__":
             border-right-style: none;
             
         }
-        #SubmitButton {
-            
-        }
+        
                 """)
     app.setPalette(palette)
 
