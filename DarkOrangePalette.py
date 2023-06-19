@@ -1,4 +1,4 @@
-from PyQt5.QtGui import QPalette, QColor
+from PyQt5.QtGui import QPalette, QColor 
 
 class DarkOrangePalette(QPalette):
    
@@ -6,6 +6,7 @@ class DarkOrangePalette(QPalette):
         super().__init__()
         self.setColor(QPalette.Window, QColor(51, 51, 51))
         self.setColor(QPalette.Button, QColor(255, 128, 0))
-        self.setColor(QPalette.ButtonText, QColor(255, 255, 255))
+        self.setColor(QPalette.ButtonText, QColor(25, 25, 25))
         self.setColor(QPalette.Base, QColor(25, 25, 25))
         self.setColor(QPalette.AlternateBase, QColor(51, 51, 51))
+

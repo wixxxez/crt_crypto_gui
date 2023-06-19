@@ -17,8 +17,8 @@ class CustomTabWidget(VerticalTabWidget):
         tab1 = QWidget()
         tab2 = QWidget()
         
-        self.addTab(tab1, "Tab 1")
-        self.addTab(tab2, "Tab 2")
+        self.addTab(tab1, "Layer 1")
+        self.addTab(tab2, "Layer 2")
         
 
     def createLayouts(self):
@@ -27,7 +27,7 @@ class CustomTabWidget(VerticalTabWidget):
             self.createLayoutForTab(tab,i)
             
     def createLayoutForTab(self,tab, tab_number):
-            label = QLabel(f"Tab {tab_number+1}: {tab}")
+            label = QLabel(f"Layer {tab_number+1}: {tab}")
             label.setAlignment(Qt.AlignCenter)
             tab1_layout = QVBoxLayout(tab)
             tab1_layout.addWidget(label)
