@@ -40,6 +40,7 @@ class NavigationBar(QHBoxLayout):
         self.setObjectName("NavBar")
         palette = DarkOrangePalette()
         # Create the "Config" button
+        self.parent_l = main_layout
         config_button = NavBarButton("Config",self.open_config_dialog)
         self.config_button = config_button
         self.addWidget(self.config_button)
@@ -53,5 +54,5 @@ class NavigationBar(QHBoxLayout):
         self.addWidget(self.close_button)
         
     def open_config_dialog(self):
-        dialog = ConfigDialog(self.encypted_message_layout.update_label_bot_text)
+        dialog = ConfigDialog(self.parent_l.initUI)
         dialog.exec_()

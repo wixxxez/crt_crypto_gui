@@ -55,8 +55,8 @@ class ConfigDialog(QDialog):
             
             return
         
-        self.accept(input1_value)
+        self.accept(input1_value, input2_value)
         
-    def accept(self, input_value) -> None:
-        self.callback(input_value)
+    def accept(self, input_value, input2_value = None) -> None:
+        self.callback(input_value, input2_value)
         return super().accept()

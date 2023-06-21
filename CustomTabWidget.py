@@ -4,11 +4,15 @@ from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtCore import QRect, QPoint, Qt
 from LayerMainLayout import LayerMainLayout
 from VerticalTabBar import VerticalTabWidget
+from bs4 import BeautifulSoup
+
+import crt 
 
 class CustomTabWidget(VerticalTabWidget):
     
-    def __init__(self) -> None:
+    def __init__(self, parent) -> None:
         super().__init__()
+        self.parent = parent
         self.createTabs()
         self.createLayouts()
         
@@ -22,6 +26,7 @@ class CustomTabWidget(VerticalTabWidget):
         
 
     def createLayouts(self):
+        
         for i in range(self.count()):
             tab = self.widget(i)
             self.createLayoutForTab(tab,i)
@@ -41,9 +46,25 @@ class CustomTabWidget(VerticalTabWidget):
     def createLayoutForTab(self,tab, tab_number):
             label = QLabel(f"Layer {tab_number+1}: {tab}")
             label.setAlignment(Qt.AlignCenter)
-            tab1_layout = LayerMainLayout(tab, tab_number+1, self)
+            prev_tab = self.widget(tab_number-1)
+            content = None
+            if prev_tab:
+                layer = prev_tab.layout().layer
+                print(self.parent.keys_per_layer)
+                layer, keys = crt.init_layer(layer,self.parent.keys_per_layer )
+            else:
+                html_string = self.parent.nav_layout.encypted_message_layout.label_bot.text()
+                soup = BeautifulSoup(html_string, 'html.parser')
+                text = soup.get_text()
+                integer_value = int(text)
+                
+                layer ,keys = crt.init_1_layer(integer_value, self.parent.keys_per_layer)
+            
+            content = [layer, keys]
+            tab1_layout = LayerMainLayout(tab, tab_number+1, self, content)
             
     def next_tab(self):
         cur_index = self.currentIndex()
         if cur_index < len(self)-1:
             self.setCurrentIndex(cur_index+1)
+

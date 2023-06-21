@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication,QLabel, QMainWindow, QWidget, QVBoxLayout, QTabWidget, QTabBar, QPushButton, QLineEdit, QLabel, QHBoxLayout, QStylePainter, QStyleOptionTab, QStyle, QProxyStyle, QGraphicsDropShadowEffect, qApp
 from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtCore import QRect, QPoint, Qt
-
+import crt
 class NavBarView(QVBoxLayout):
     
     def __init__(self):
@@ -18,6 +18,7 @@ class NavBarView(QVBoxLayout):
         self.addWidget(self.label_bot)
 
     
-    def update_label_bot_text(self, new_text):
-        self.label_bot.setText(f"<h4><center>{new_text}</center></h4>")
+    def update_label_bot_text(self, new_text, keys = None):
+        text = crt.encrypt_message(new_text)
+        self.label_bot.setText(f"<h4><center>{text}</center></h4>")
    
