@@ -5,7 +5,7 @@ from PyQt5.QtCore import QRect, QPoint, Qt
 import CustomTabWidget
 import DarkOrangePalette
 from Navbar import NavigationBar
-
+from LayerMainLayout import LayerMainLayout
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -28,6 +28,8 @@ class MainWindow(QMainWindow):
         
 
         self.setCentralWidget(main_widget)
+        
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
@@ -49,7 +51,19 @@ if __name__ == "__main__":
         #ConfigButton:hover {
             background-color: rgb(255,169,82);
         }
-        
+        #AddLayerButton {
+            background-color: rgb(255,169,82);
+            border: 1px solid black;
+            border-top-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding:10px;
+            width:120%;
+            height: 40%;
+           
+        }
+        #AddLayerButton:hover {
+            background-color: rgb(236,156,76);
+        }
         #NavBarLabel {
             color:orange;
         }
@@ -60,6 +74,23 @@ if __name__ == "__main__":
             border-left-style: none;
             border-right-style: none;
             
+        }
+        #TextAreaLayer {
+            color: white;
+        }
+        #DecryptButton {
+            background-color: rgb(51, 51, 51);
+            border : 1px solid white;
+            color:white;
+            width:120%;
+            height:50%
+        }
+        #DecryptButton:hover{
+            background-color: grey;
+        }
+        #LayerNavBarNew {
+            font-size:18px;
+            padding-bottom:10px;
         }
         
                 """)

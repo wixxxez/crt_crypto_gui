@@ -60,4 +60,3 @@ class ConfigDialog(QDialog):
     def accept(self, input_value) -> None:
         self.callback(input_value)
         return super().accept()
-    
