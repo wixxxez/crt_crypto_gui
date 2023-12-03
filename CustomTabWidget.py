@@ -5,8 +5,9 @@ from PyQt5.QtCore import QRect, QPoint, Qt
 from LayerMainLayout import LayerMainLayout
 from VerticalTabBar import VerticalTabWidget
 from bs4 import BeautifulSoup
-
+import time
 import crt 
+ 
 
 class CustomTabWidget(VerticalTabWidget):
     
@@ -51,16 +52,20 @@ class CustomTabWidget(VerticalTabWidget):
             if prev_tab:
                 layer = prev_tab.layout().layer
                 print(self.parent.keys_per_layer)
+                start_time = time.time()
                 layer, keys = crt.init_layer(layer,self.parent.keys_per_layer )
+                end_time = time.time()
+                elapsed_time = end_time - start_time
             else:
                 html_string = self.parent.nav_layout.encypted_message_layout.label_bot.text()
                 soup = BeautifulSoup(html_string, 'html.parser')
                 text = soup.get_text()
                 integer_value = int(text)
-                
+                start_time = time.time()
                 layer ,keys = crt.init_1_layer(integer_value, self.parent.keys_per_layer)
-            
-            content = [layer, keys]
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+            content = [layer, keys, elapsed_time]
             tab1_layout = LayerMainLayout(tab, tab_number+1, self, content)
             
     def next_tab(self):

@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 import numpy as np
 import crt
 from ErrorHandler import WarningMessage
-
+import time
 class BottomBorderLabel(QLabel):
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -14,13 +14,14 @@ class BottomBorderLabel(QLabel):
         super().paintEvent(event)
         
         
+
 class LayerMainLayout(QVBoxLayout):
     
     def __init__(self, parent, i, parent_layout, content=None):
         super().__init__(parent)
         # Create the label with the text "Keys for layer 2:"s
         hbox = QHBoxLayout()
-        
+        self.layer_numer = i
         label1 = QLabel(f'<center>Keys for layer {i}:</center>')
         label1.setStyleSheet("font-size:20px;")
         self.addWidget(label1)
@@ -29,6 +30,7 @@ class LayerMainLayout(QVBoxLayout):
         if content:
             self.layer = content[0]
             self.keys = content[1]
+            self.elapsed_time_encrypted = content[2]
         # Create the second label with a bottom orange border
         
         label2 = QLineEdit()
@@ -41,7 +43,7 @@ class LayerMainLayout(QVBoxLayout):
 
         vvbox = QVBoxLayout()
         # Create the first text area
-        label_encr = QLabel("Encrypted values:")
+        label_encr = QLabel(f"Encrypted values from level {i}. Calculation time is [{round(self.elapsed_time_encrypted,5)}] s. ")
         label_encr.setObjectName("LayerLabel")
         text_area1 = QTextEdit()
         text_area1.setReadOnly(True)
@@ -61,13 +63,14 @@ class LayerMainLayout(QVBoxLayout):
 
         # Create the second text area
         vv2box = QVBoxLayout()
-        label_dec = QLabel("Decrypted values:")
+        label_dec = QLabel(f"Decrypted values from layer {i}:")
         label_dec.setObjectName("LayerLabel")
         text_area2 = QTextEdit( )
         text_area2.setReadOnly(True)
         text_area2.setObjectName("TextAreaLayer")
         self.text_area2 = text_area2
-        vv2box.addWidget(label_dec)
+        self.label_dec = label_dec
+        vv2box.addWidget(self.label_dec)
         vv2box.addWidget(self.text_area2)
         hbox.addLayout(vv2box)
         hhbox = QHBoxLayout()
@@ -88,6 +91,7 @@ class LayerMainLayout(QVBoxLayout):
         prev_layer = []
         print("Keys", self.keys)
         print(integers)
+        start_time = time.time()
         try:
             for i in integers:
                 
@@ -95,9 +99,10 @@ class LayerMainLayout(QVBoxLayout):
                 prev_layer.append(prev_layer_value)
         except ValueError as e :
             WarningMessage("Error",f"{e}")
-        
+        end_time = time.time()
+        elapsed_time = end_time - start_time
         self.text_area2.setText(f"{prev_layer}")
-        
+        self.label_dec.setText(f"Decrypted values from level {self.layer_numer}. Calculation time is: [{round(elapsed_time,5)}] s.")
     def setKeys(self, keys):
         
         self.label2.setText(keys)
