@@ -6,6 +6,9 @@ from ConfigDialog import ConfigDialog
 from DarkOrangePalette import DarkOrangePalette
 from ShadowEffect import NavBarShadow
 from EncryptedMessageView import NavBarView
+from PlotlyWidget import PlotlyWidget
+
+
 class NavBarButton(QPushButton):
     def __init__(self, name, callback):
         QPushButton.__init__(self, name)
@@ -45,14 +48,22 @@ class NavigationBar(QHBoxLayout):
         self.config_button = config_button
         self.addWidget(self.config_button)
         self.encypted_message_layout = NavBarView()
+        graph_button = NavBarButton("Plot graph", self.open_plotly_widget)
+        self.graph_button= graph_button
+        self.addWidget(self.graph_button)
         self.addStretch(1)
         self.addLayout(self.encypted_message_layout)
         self.addStretch(1)
+        
         close_button = NavBarButton("Close",main_layout.close)
-    
         self.close_button = close_button
         self.addWidget(self.close_button)
         
     def open_config_dialog(self):
         dialog = ConfigDialog(self.parent_l.initUI)
         dialog.exec_()
+    
+    def open_plotly_widget(self):
+        self.dialog = PlotlyWidget(self.parent_l.initUI)
+        self.dialog.show()
+        

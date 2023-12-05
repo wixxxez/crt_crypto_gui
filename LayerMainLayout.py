@@ -4,8 +4,12 @@ from PyQt5.QtGui import QColor, QPainter, QPen
 from PyQt5.QtCore import Qt
 import numpy as np
 import crt
+import pandas as pd
 from ErrorHandler import WarningMessage
 import time
+import config
+import warnings
+warnings.filterwarnings('ignore')
 class BottomBorderLabel(QLabel):
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -45,6 +49,7 @@ class LayerMainLayout(QVBoxLayout):
         # Create the first text area
         label_encr = QLabel(f"Encrypted values from level {i}. Calculation time is [{round(self.elapsed_time_encrypted,5)}] s. ")
         label_encr.setObjectName("LayerLabel")
+        config.dataset = config.dataset.append(pd.DataFrame({'Layer':i, "Type":'Encrypted time','time':self.elapsed_time_encrypted}, index = ['A']))
         text_area1 = QTextEdit()
         text_area1.setReadOnly(True)
         text_area1.setText(f"{self.layer}")
@@ -99,10 +104,14 @@ class LayerMainLayout(QVBoxLayout):
                 prev_layer.append(prev_layer_value)
         except ValueError as e :
             WarningMessage("Error",f"{e}")
+            config.dataset = config.dataset.append(pd.DataFrame({'Layer':self.layer_numer, "Type":'Decrypted time','time':"NaN"}, index= ['A']))
         end_time = time.time()
+        
         elapsed_time = end_time - start_time
         self.text_area2.setText(f"{prev_layer}")
         self.label_dec.setText(f"Decrypted values from level {self.layer_numer}. Calculation time is: [{round(elapsed_time,5)}] s.")
+        config.dataset = config.dataset.append(pd.DataFrame({'Layer':self.layer_numer, "Type":'Decrypted time','time':elapsed_time}, index= ['A']))
+    
     def setKeys(self, keys):
         
         self.label2.setText(keys)
